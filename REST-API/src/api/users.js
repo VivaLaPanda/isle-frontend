@@ -28,7 +28,7 @@ export default ({config}) => resource({
     //     })
     // },
 
-    id : 'user',
+    sharedId : 'user',
 
     /** POST / - Create a new top level post */
     create({body}, res) {
@@ -59,7 +59,8 @@ export default ({config}) => resource({
 
     /** GET /:id - Return a given entity */
     read(req, res) {
-      const id = req.params[this.id];
+      const id = 0;
+      console.log(req);
 
       const getUserById =
         `{
