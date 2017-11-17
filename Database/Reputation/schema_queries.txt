@@ -1,0 +1,42 @@
+mutation {
+  schema {
+    # Used to differentiate between the below types
+    type: string @index(hash) .
+    
+    # User
+    username: string @index(exact) .
+    password: password .
+    email: string @index(hash) .
+    avi_img: string .
+    reputation: int .
+    role: uid .
+    invited_by: uid .
+    joined: dateTime .
+    posted: uid @reverse @count .
+    commented: uid @reverse @count .
+    
+    # Role
+    role_text: string @index(hash) .
+    
+    # Post/Comment
+    title: string @index(fulltext) .
+    image: string .
+    body: string @index(fulltext) . 
+    posted: dateTime .
+    tags: uid .
+    score: int .
+    is_positive: bool .
+    children: uid @count .
+    
+    # Tag
+    tag_text: string @index(hash) .
+    
+    # Purchasables
+    purchaseable_name: string .
+    cost: int .
+    
+    # Invites
+    invite_code: string @index(hash) .
+    used: bool .
+  }
+}
