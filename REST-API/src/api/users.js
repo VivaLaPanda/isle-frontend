@@ -47,11 +47,11 @@ export default ({config}) => resource({
         .then((queryRes) => {
           if (queryRes.data === null) {
             console.error(queryRes.errors);
-            res.status(500).json(queryRes.errors);
+            res.status(500).send(queryRes.errors);
 
             return;
           }
-          res.status(200).json(queryRes.data);
+          res.status(200).send(queryRes.data);
         })
     },
 
@@ -78,11 +78,13 @@ export default ({config}) => resource({
         .then((queryRes) => {
           if (queryRes.data === null) {
             console.error(queryRes.errors);
-            res.status(500).json(queryRes.errors);
+            res.status(500).send(queryRes.errors);
 
             return;
           }
-          res.status(200).json(queryRes.data);
+
+          console.log(queryRes);
+          res.status(200).send(queryRes.data);
         })
     }
     //
