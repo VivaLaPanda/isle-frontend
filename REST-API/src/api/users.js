@@ -28,6 +28,8 @@ export default ({config}) => resource({
     //     })
     // },
 
+    id : 'user',
+
     /** POST / - Create a new top level post */
     create({body}, res) {
       const newUser =
@@ -45,7 +47,7 @@ export default ({config}) => resource({
       reqOpts.body = newUser;
       return rp(reqOpts)
         .then((queryRes) => {
-          if (queryRes.data === null) {
+          if (!(queryRes.data)) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
 
@@ -56,8 +58,10 @@ export default ({config}) => resource({
     },
 
     /** GET /:id - Return a given entity */
-    read({id}, res) {
-      const getPostById =
+    read(req, res) {
+      const id = req.params[this.id];
+
+      const getUserById =
         `{
           fetchUser(func: uid(${id})) {
             name: user.name@.
@@ -73,10 +77,10 @@ export default ({config}) => resource({
           }  
         }`;
 
-      reqOpts.body = getPostById;
+      reqOpts.body = getUserById;
       return rp(reqOpts)
         .then((queryRes) => {
-          if (queryRes.data === null) {
+          if (!(queryRes.data)) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
 

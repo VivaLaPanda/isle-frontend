@@ -41,7 +41,7 @@ let reqOpts = {
 reqOpts.body = Schema.schemaQuery;
 rp(reqOpts)
   .then((queryRes) => {
-    if (queryRes.data === null) {
+    if (!(queryRes.data)) {
       console.error(queryRes.errors);
     }
   });

@@ -27,7 +27,7 @@ const makePost = function(body, res) {
   reqOpts.body = createPost;
   return rp(reqOpts)
     .then((queryRes) => {
-      if (queryRes.data === null) {
+      if (!(queryRes.data)) {
         res.status(500).json(queryRes.errors);
 
         return;
@@ -84,7 +84,7 @@ const makeComment = function(body, res) {
   reqOpts.body = fetchContentTree;
   rp(reqOpts)
     .then((queryRes) => {
-      if (queryRes.data === null) {
+      if (!(queryRes.data)) {
         console.error(queryRes.errors);
         res.status(500).json(queryRes.errors);
 
@@ -136,7 +136,7 @@ const makeComment = function(body, res) {
       return rp(reqOpts);
     })
     .then((queryRes) => {
-      if (queryRes.data === null) {
+      if (!(queryRes.data)) {
         console.error(queryRes.errors);
         res.status(500).json(queryRes.errors);
 
@@ -184,7 +184,7 @@ export default ({config}) => resource({
       reqOpts.body = queryPost;
       return rp(reqOpts)
         .then((queryRes) => {
-          if (queryRes.data === null) {
+          if (!(queryRes.data)) {
             console.error(queryRes.errors);
             res.status(500).json(queryRes.errors);
 
@@ -226,7 +226,7 @@ export default ({config}) => resource({
       reqOpts.body = queryPost;
       return rp(reqOpts)
         .then((queryRes) => {
-          if (queryRes.data === null) {
+          if (!(queryRes.data)) {
             console.error(queryRes.errors);
             res.status(500).json(queryRes.errors);
 
