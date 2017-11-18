@@ -47,7 +47,7 @@ export default ({config}) => resource({
       reqOpts.body = newUser;
       return rp(reqOpts)
         .then((queryRes) => {
-          if (!(queryRes.data)) {
+          if (queryRes.data === null) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
 
@@ -59,8 +59,7 @@ export default ({config}) => resource({
 
     /** GET /:id - Return a given entity */
     read(req, res) {
-      const id = 0;
-      console.log(req);
+      const id = req.params[undefined];
 
       const getUserById =
         `{
@@ -81,7 +80,7 @@ export default ({config}) => resource({
       reqOpts.body = getUserById;
       return rp(reqOpts)
         .then((queryRes) => {
-          if (!(queryRes.data)) {
+          if (queryRes.data === null) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
 
