@@ -4,7 +4,6 @@ const rp = require('request-promise');
 
 let reqOpts = {
   method: 'POST',
-  uri: Constants.dbUrl + 'query',
 };
 
 export default ({config}) => resource({
@@ -33,7 +32,7 @@ export default ({config}) => resource({
     /** POST / - Create a new top level post */
     create({body}, res) {
       const newUser =
-        `mutation {
+        `{
             set {
                 _:newUser <user.name> "${body.name}" .
                 _:newUser <user.password> "${body.password}" .
@@ -45,9 +44,10 @@ export default ({config}) => resource({
         }`;
 
       reqOpts.body = newUser;
+      reqOpts.uri = Constants.dbUrl + 'mutate';
       return rp(reqOpts)
         .then((queryRes) => {
-          if (queryRes.data === null) {
+          if (queryRes.errors) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
 
@@ -78,9 +78,10 @@ export default ({config}) => resource({
         }`;
 
       reqOpts.body = getUserById;
+      reqOpts.uri = Constants.dbUrl + 'query';
       return rp(reqOpts)
         .then((queryRes) => {
-          if (queryRes.data === null) {
+          if (queryRes.errors) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
 

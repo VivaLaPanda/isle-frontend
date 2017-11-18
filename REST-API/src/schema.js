@@ -1,6 +1,6 @@
 export class Schema {
   static get schemaQuery() {
-    return `mutation {
+    return `{
         schema {
           # Used to differentiate between the below types
           type: string @index(hash) .

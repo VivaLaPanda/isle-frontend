@@ -34,14 +34,14 @@ app.use('/api', api({ config }));
 
 let reqOpts = {
   method: 'POST',
-  uri: Constants.dbUrl + 'query',
+  uri: Constants.dbUrl + 'alter',
 };
 
 // Make sure the newest schema is loaded in
 reqOpts.body = Schema.schemaQuery;
 rp(reqOpts)
   .then((queryRes) => {
-    if (queryRes.data === null) {
+    if (queryRes.errors) {
       console.error(queryRes.errors);
     }
   });
