@@ -4,7 +4,6 @@
     <list default="true" id="9d7f397f-a8a7-498c-8888-56c3a26d3083" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/users.js" afterPath="$PROJECT_DIR$/src/api/users.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/schema.js" afterPath="$PROJECT_DIR$/src/schema.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,8 +20,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="443">
+              <caret line="43" column="37" lean-forward="false" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -55,18 +54,18 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+            <state relative-caret-position="493">
+              <caret line="51" column="29" lean-forward="true" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="43" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <marker date="1512722449001" expanded="true" signature="980:1308" ph="..." />
-                <marker date="1512722449001" expanded="true" signature="980:1316" ph="..." />
-                <marker date="1512722449001" expanded="true" signature="1062:1308" ph="..." />
-                <marker date="1512722449001" expanded="true" signature="1099:1308" ph="..." />
-                <marker date="1512722449001" expanded="true" signature="1161:1308" ph="..." />
-                <marker date="1512722449001" expanded="true" signature="1182:1308" ph="..." />
-                <marker date="1512722449001" expanded="true" signature="1224:1308" ph="..." />
-                <marker date="1512722449001" expanded="true" signature="1286:1308" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1006:1352" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1006:1360" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1088:1352" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1125:1352" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1187:1352" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1208:1352" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1250:1352" ph="..." />
+                <marker date="1512722896491" expanded="true" signature="1328:1352" ph="..." />
               </folding>
             </state>
           </provider>
@@ -261,12 +260,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1512698574334</updated>
-      <workItem from="1512698578060" duration="20821000" />
+      <workItem from="1512698578060" duration="21233000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20821000" />
+    <option name="totallyTimeSpent" value="21233000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="173" width="1616" height="876" extended-state="6" />
@@ -411,24 +410,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="79" column="33" lean-forward="false" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <marker date="1512722449001" expanded="true" signature="980:1308" ph="..." />
-            <marker date="1512722449001" expanded="true" signature="980:1316" ph="..." />
-            <marker date="1512722449001" expanded="true" signature="1062:1308" ph="..." />
-            <marker date="1512722449001" expanded="true" signature="1099:1308" ph="..." />
-            <marker date="1512722449001" expanded="true" signature="1161:1308" ph="..." />
-            <marker date="1512722449001" expanded="true" signature="1182:1308" ph="..." />
-            <marker date="1512722449001" expanded="true" signature="1224:1308" ph="..." />
-            <marker date="1512722449001" expanded="true" signature="1286:1308" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/schema.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -437,10 +418,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="51" column="29" lean-forward="true" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <marker date="1512722896491" expanded="true" signature="1006:1352" ph="..." />
+            <marker date="1512722896491" expanded="true" signature="1006:1360" ph="..." />
+            <marker date="1512722896491" expanded="true" signature="1088:1352" ph="..." />
+            <marker date="1512722896491" expanded="true" signature="1125:1352" ph="..." />
+            <marker date="1512722896491" expanded="true" signature="1187:1352" ph="..." />
+            <marker date="1512722896491" expanded="true" signature="1208:1352" ph="..." />
+            <marker date="1512722896491" expanded="true" signature="1250:1352" ph="..." />
+            <marker date="1512722896491" expanded="true" signature="1328:1352" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="443">
+          <caret line="43" column="37" lean-forward="false" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
