@@ -30,10 +30,8 @@ export default ({config}) => resource({
     sharedId : 'user',
 
     /** POST / - Create a new top level post */
-    create(req, res) {
-      console.log(req);
-      const body = {};
-
+    create({body}, res) {
+      
       const newUser =
         `{
             set {
