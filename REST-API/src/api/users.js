@@ -31,19 +31,18 @@ export default ({config}) => resource({
 
     /** POST / - Create a new top level post */
     create({body}, res) {
-      
+
       const newUser =
         `{
             set {
                 _:newUser <user.name> "${body.name}" .
                 _:newUser <user.password> "${body.password}" .
                 _:newUser <user.email> "${body.email}" .
-                _:newUser <user.invited_by> <${body.invited_by}> .
                 _:newUser <user.joined> "${(new Date()).toISOString()}" .
                 _:newUser <user.reputation> "100" .
             }
         }`;
-
+      // _:newUser <user.invited_by> <${body.invited_by}> .
       reqOpts.body = newUser;
       reqOpts.uri = Constants.dbUrl + 'mutate';
       return rp(reqOpts)
@@ -55,6 +54,7 @@ export default ({config}) => resource({
             return;
           }
 
+          console.log(queryRes);
           res.status(200).send(queryRes.data);
         })
     },
