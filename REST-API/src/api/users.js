@@ -4,6 +4,9 @@ const rp = require('request-promise');
 
 let reqOpts = {
   method: 'POST',
+  headers: {
+    'X-Dgraph-CommitNow': 'true'
+  }
 };
 
 export default ({config}) => resource({
@@ -55,7 +58,7 @@ export default ({config}) => resource({
           }
 
           console.log(queryRes);
-          res.status(200).send(queryRes.data);
+          res.send(queryRes.data);
         })
     },
 
@@ -91,7 +94,7 @@ export default ({config}) => resource({
           }
 
           console.log(queryRes);
-          res.status(200).send(queryRes.data);
+          res.send(queryRes.data);
         })
     }
     //

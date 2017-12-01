@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d7f397f-a8a7-498c-8888-56c3a26d3083" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.dockerignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/users.js" afterPath="$PROJECT_DIR$/src/api/users.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -53,18 +55,18 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/api/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state relative-caret-position="612">
+              <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <marker date="1512723521847" expanded="true" signature="981:1260" ph="..." />
-                <marker date="1512723521847" expanded="true" signature="981:1268" ph="..." />
-                <marker date="1512723521847" expanded="true" signature="1063:1260" ph="..." />
-                <marker date="1512723521847" expanded="true" signature="1100:1260" ph="..." />
-                <marker date="1512723521847" expanded="true" signature="1119:1260" ph="..." />
-                <marker date="1512723521847" expanded="true" signature="1158:1260" ph="..." />
-                <marker date="1512723521847" expanded="true" signature="1236:1260" ph="..." />
-                <marker date="1512723521847" expanded="true" signature="1271:1879" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1031:1310" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1031:1318" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1113:1310" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1150:1310" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1169:1310" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1208:1310" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1286:1310" ph="..." />
+                <marker date="1512724738643" expanded="true" signature="1321:1917" ph="..." />
               </folding>
             </state>
           </provider>
@@ -100,8 +102,31 @@
       <file leaf-file-name="constants.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/constants.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="1" />
+            <state relative-caret-position="68">
+              <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="374">
+                <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="33" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".dockerignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.dockerignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -142,11 +167,12 @@
         <option value="$PROJECT_DIR$/src/middleware/index.js" />
         <option value="$PROJECT_DIR$/src/db.js" />
         <option value="$PROJECT_DIR$/src/api/facets.js" />
-        <option value="$PROJECT_DIR$/src/constants.js" />
         <option value="$PROJECT_DIR$/src/api/index.js" />
         <option value="$PROJECT_DIR$/src/api/content.js" />
         <option value="$PROJECT_DIR$/src/schema.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/.dockerignore" />
+        <option value="$PROJECT_DIR$/src/constants.js" />
         <option value="$PROJECT_DIR$/src/api/users.js" />
       </list>
     </option>
@@ -198,24 +224,6 @@
               <item name="REST-API" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="REST-API" type="b2602c69:ProjectViewProjectNode" />
-              <item name="REST-API" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="REST-API" type="b2602c69:ProjectViewProjectNode" />
-              <item name="REST-API" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="REST-API" type="b2602c69:ProjectViewProjectNode" />
-              <item name="REST-API" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="middleware" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -259,12 +267,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1512698574334</updated>
-      <workItem from="1512698578060" duration="21851000" />
+      <workItem from="1512698578060" duration="23080000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21851000" />
+    <option name="totallyTimeSpent" value="23080000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="173" width="1616" height="876" extended-state="6" />
@@ -313,14 +321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -355,25 +355,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="391">
-            <caret line="43" column="33" lean-forward="true" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/content.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="426">
@@ -399,16 +380,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/schema.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -427,20 +398,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="374">
+            <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="33" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.dockerignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state relative-caret-position="612">
+          <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-            <marker date="1512723521847" expanded="true" signature="981:1260" ph="..." />
-            <marker date="1512723521847" expanded="true" signature="981:1268" ph="..." />
-            <marker date="1512723521847" expanded="true" signature="1063:1260" ph="..." />
-            <marker date="1512723521847" expanded="true" signature="1100:1260" ph="..." />
-            <marker date="1512723521847" expanded="true" signature="1119:1260" ph="..." />
-            <marker date="1512723521847" expanded="true" signature="1158:1260" ph="..." />
-            <marker date="1512723521847" expanded="true" signature="1236:1260" ph="..." />
-            <marker date="1512723521847" expanded="true" signature="1271:1879" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1031:1310" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1031:1318" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1113:1310" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1150:1310" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1169:1310" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1208:1310" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1286:1310" ph="..." />
+            <marker date="1512724738643" expanded="true" signature="1321:1917" ph="..." />
           </folding>
         </state>
       </provider>
