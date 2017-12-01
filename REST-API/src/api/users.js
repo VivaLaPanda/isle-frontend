@@ -42,10 +42,10 @@ export default ({config}) => resource({
                 _:newUser <user.password> "${body.password}" .
                 _:newUser <user.email> "${body.email}" .
                 _:newUser <user.joined> "${(new Date()).toISOString()}" .
+                _:newUser <user.invited_by> <${body.invited_by}> .
                 _:newUser <user.reputation> "100" .
             }
         }`;
-      // _:newUser <user.invited_by> <${body.invited_by}> .
       reqOpts.body = newUser;
       reqOpts.uri = Constants.dbUrl + 'mutate';
       return rp(reqOpts)
