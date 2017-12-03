@@ -46,7 +46,7 @@ export default ({config}) => resource({
       reqOpts.body = newUser;
       return rp(reqOpts)
         .then((queryRes) => {
-          res.status(204).json(queryRes.data);
+          res.status(200).json(queryRes.data);
         })
     },
 

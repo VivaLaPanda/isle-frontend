@@ -125,7 +125,7 @@ const makeComment = function(body, res) {
       return rp(reqOpts);
     })
     .then((queryRes) => {
-      res.status(204).json(queryRes.data);
+      res.status(200).json(queryRes.data);
     })
 };
 
