@@ -28,6 +28,11 @@ const makePost = function(body, res) {
   reqOpts.body = createPost;
   return rp(reqOpts)
     .then((queryRes) => {
+      if (queryRes.data === null) {
+        res.status(500).json(queryRes.error());
+
+        return;
+      }
       res.status(204).json(queryRes.data);
     })
 };
@@ -80,8 +85,14 @@ const makeComment = function(body, res) {
   reqOpts.body = fetchContentTree;
   rp(reqOpts)
     .then((parentTree) => {
+      if (parentTree.data === null) {
+        res.status(500).json(parentTree.error());
+
+        return;
+      }
+
       let treeArr = [{sentiment: body.sentiment}];
-      treeArr = buildParentTree(parentTree, treeArr);
+      treeArr = buildParentTree(parentTree.data, treeArr);
 
       // Walk the flattened tree and calc reputation/score
       let workingSentiment = body.sentiment;
@@ -125,6 +136,11 @@ const makeComment = function(body, res) {
       return rp(reqOpts);
     })
     .then((queryRes) => {
+      if (queryRes.data === null) {
+        res.status(500).json(queryRes.error());
+
+        return;
+      }
       res.status(200).json(queryRes.data);
     })
 };

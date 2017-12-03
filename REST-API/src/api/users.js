@@ -46,6 +46,11 @@ export default ({config}) => resource({
       reqOpts.body = newUser;
       return rp(reqOpts)
         .then((queryRes) => {
+          if (queryRes.data === null) {
+            res.status(500).json(queryRes.error());
+
+            return;
+          }
           res.status(200).json(queryRes.data);
         })
     },
@@ -71,6 +76,11 @@ export default ({config}) => resource({
       reqOpts.body = getPostById;
       return rp(reqOpts)
         .then((queryRes) => {
+          if (queryRes.data === null) {
+            res.status(500).json(queryRes.error());
+
+            return;
+          }
           res.status(200).json(queryRes.data);
         })
     }
