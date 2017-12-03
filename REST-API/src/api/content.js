@@ -86,6 +86,7 @@ const makeComment = function(body, res) {
   rp(reqOpts)
     .then((parentTree) => {
       if (parentTree.data === null) {
+        console.error(parentTree.error);
         res.status(500).json(parentTree.error);
 
         return;
@@ -137,6 +138,7 @@ const makeComment = function(body, res) {
     })
     .then((queryRes) => {
       if (queryRes.data === null) {
+        console.error(queryRes.error);
         res.status(500).json(queryRes.error);
 
         return;
@@ -184,6 +186,12 @@ export default ({config}) => resource({
       reqOpts.body = queryPost;
       return rp(reqOpts)
         .then((queryRes) => {
+          if (queryRes.data === null) {
+            console.error(queryRes.error);
+            res.status(500).json(queryRes.error);
+
+            return;
+          }
           res.status(200).json(queryRes.data);
         })
     },
@@ -220,6 +228,12 @@ export default ({config}) => resource({
       reqOpts.body = queryPost;
       return rp(reqOpts)
         .then((queryRes) => {
+          if (queryRes.data === null) {
+            console.error(queryRes.error);
+            res.status(500).json(queryRes.error);
+
+            return;
+          }
           res.status(200).json(queryRes.data);
         })
     },
