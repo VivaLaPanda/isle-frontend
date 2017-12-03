@@ -1,5 +1,5 @@
 export class Constants {
   static get dbUrl() {
-    return 'http://10.128.0.7:8081/';
+    return 'http://10.128.0.7/';
   }
 }

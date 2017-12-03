@@ -1,15 +1,14 @@
 import {Constants} from "../constants";
+import resource from 'resource-router-middleware';
 const rp = require('request-promise');
 
 let reqOpts = {
   method: 'POST',
-  uri: Constants.dbUrl() + 'query',
+  uri: Constants.dbUrl + 'query',
   json: true,
 };
 
-export default ({config}) => {
-  return {
-
+export default ({config}) => resource({
     // /** GET / - List all entities */
     // index({params}, res) {
     //   const queryPost = `
@@ -74,7 +73,7 @@ export default ({config}) => {
         .then((queryRes) => {
           res.status(200).json(queryRes.data);
         })
-    },
+    }
     //
     // /** PUT /:id - Update a given entity */
     // update({facet, body}, res) {
@@ -91,5 +90,4 @@ export default ({config}) => {
     //   facets.splice(facets.indexOf(facet), 1);
     //   res.sendStatus(204);
     // }
-  };
-};
+});
