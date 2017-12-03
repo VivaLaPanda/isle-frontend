@@ -29,7 +29,7 @@ const makePost = function(body, res) {
   return rp(reqOpts)
     .then((queryRes) => {
       if (queryRes.data === null) {
-        res.status(500).json(queryRes.error());
+        res.status(500).json(queryRes.error);
 
         return;
       }
@@ -86,7 +86,7 @@ const makeComment = function(body, res) {
   rp(reqOpts)
     .then((parentTree) => {
       if (parentTree.data === null) {
-        res.status(500).json(parentTree.error());
+        res.status(500).json(parentTree.error);
 
         return;
       }
@@ -137,7 +137,7 @@ const makeComment = function(body, res) {
     })
     .then((queryRes) => {
       if (queryRes.data === null) {
-        res.status(500).json(queryRes.error());
+        res.status(500).json(queryRes.error);
 
         return;
       }
