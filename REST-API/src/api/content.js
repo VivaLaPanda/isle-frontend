@@ -128,12 +128,49 @@ const makeComment = function(body, res) {
     })
 };
 
+const basePost = `
+  title: content.title@.
+  imageUri: content.imageUri
+  timestamp: content.created
+  score: content.score
+  submitted: ~user.posted {
+      user.name@.
+  }
+  tags: content.tags {
+      tag.text@.
+  }
+  numComments: count(content.children)
+`;
+
+const commentFragment = `
+  score: content.score
+  text: content.body
+  sentiment: content.sentiment
+  commented: ~user.posted {
+      user.name@.
+  }`;
+
 export default ({config}) => {
   return {
 
     /** GET / - List all entities */
     index({params}, res) {
-      res.json(facets);
+      const queryPost = ` 
+        {
+          var(func: anyoftext(content.title, "${params.query}"), first: ${params.first}, offset: ${params.offset}) {
+              p as _uid_
+          }
+      
+          queryPosts(func: uid(p), orderasc: content.created) {
+              ${basePost}
+          }
+        }`;
+
+      reqOpts.body = queryPost;
+      return rp(reqOpts)
+        .then((queryRes) => {
+          res.status(200).json(queryRes.data);
+        })
     },
 
     /** POST / - Create a new top level post */
@@ -147,24 +184,45 @@ export default ({config}) => {
     },
 
     /** GET /:id - Return a given entity */
-    read({facet}, res) {
-      res.json(facet);
-    },
+    read({id}, res) {
+      const queryPost = ` 
+        fetchPost(func: uid(${id})) {
+          ${basePost}
+          body: content.body
+          
+          ## Print out 3 layers of comments
+          comments: content.children {
+              ${commentFragment}
+                  comments: content.children {
+                      ${commentFragment}
+                      comments: content.children {
+                          ${commentFragment}
+                      }
+                  }
+          }
+	    }`;
 
-    /** PUT /:id - Update a given entity */
-    update({facet, body}, res) {
-      for (let key in body) {
-        if (key !== 'id') {
-          facet[key] = body[key];
-        }
-      }
-      res.sendStatus(204);
+      reqOpts.body = queryPost;
+      return rp(reqOpts)
+        .then((queryRes) => {
+          res.status(200).json(queryRes.data);
+        })
     },
-
-    /** DELETE /:id - Delete a given entity */
-    delete({facet}, res) {
-      facets.splice(facets.indexOf(facet), 1);
-      res.sendStatus(204);
-    }
+    //
+    // /** PUT /:id - Update a given entity */
+    // update({facet, body}, res) {
+    //   for (let key in body) {
+    //     if (key !== 'id') {
+    //       facet[key] = body[key];
+    //     }
+    //   }
+    //   res.sendStatus(204);
+    // },
+    //
+    // /** DELETE /:id - Delete a given entity */
+    // delete({facet}, res) {
+    //   facets.splice(facets.indexOf(facet), 1);
+    //   res.sendStatus(204);
+    // }
   };
 };
