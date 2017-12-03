@@ -31,8 +31,8 @@ export default ({config}) => resource({
 
     /** POST / - Create a new top level post */
     create({body}, res) {
-      const newUser = `
-        mutation {
+      const newUser =
+        `mutation {
             set {
                 _:newUser <user.name> "${body.name}" .
                 _:newUser <user.password> "${body.password}" .
@@ -58,8 +58,8 @@ export default ({config}) => resource({
 
     /** GET /:id - Return a given entity */
     read({id}, res) {
-      const getPostById = ` 
-        {
+      const getPostById =
+        `{
           fetchUser(func: uid(${id})) {
             name: user.name@.
             email: user.email@.

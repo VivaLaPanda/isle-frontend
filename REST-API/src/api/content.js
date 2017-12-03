@@ -10,8 +10,8 @@ let reqOpts = {
 
 const makePost = function(body, res) {
   // Add the post
-  let createPost = `
-        mutation {
+  let createPost =
+        `mutation {
           set {
             _:newPost <content.title> "${body.title}" .
             _:newPost <content.imageUri> "${body.imageUri}" .
@@ -20,8 +20,7 @@ const makePost = function(body, res) {
             _:newPost <content.score> 0 .
             <${body.userId}> <user.commented> _:newPost .
           }
-        }
-      `;
+        }`;
 
   // TODO: Tags
 
@@ -55,8 +54,8 @@ const buildParentTree = function(parentTree, treeArr) {
 const makeComment = function(body, res) {
 
   // Get the user's current rep
-  const fetchContentFrag = `
-        uid: _uid_
+  const fetchContentFrag =
+        `uid: _uid_
         sentiment: content.sentiment
         score: content.score
         poster: ~user.commented {
@@ -69,8 +68,8 @@ const makeComment = function(body, res) {
         }`;
 
   // Depth 3 tree fetch
-  const fetchContentTree = `
-        {
+  const fetchContentTree =
+        `{
           fetchContentTree(func: uid(${body.parentId})) {
             ${fetchContentFrag}
             parent: ~content.children {
@@ -111,8 +110,8 @@ const makeComment = function(body, res) {
       });
 
       // Add the post
-      let createPost = `
-            mutation {
+      let createPost =
+            `mutation {
               set {
                 _:newPost <content.body> "${body.body}" .
                 _:newPost <content.created> "${new Date()}" .
@@ -147,8 +146,8 @@ const makeComment = function(body, res) {
     })
 };
 
-const basePost = `
-  title: content.title@.
+const basePost =
+  `title: content.title@.
   imageUri: content.imageUri
   timestamp: content.created
   score: content.score
@@ -158,11 +157,10 @@ const basePost = `
   tags: content.tags {
       tag.text@.
   }
-  numComments: count(content.children)
-`;
+  numComments: count(content.children)`;
 
-const commentFragment = `
-  score: content.score
+const commentFragment =
+  `score: content.score
   text: content.body
   sentiment: content.sentiment
   commented: ~user.posted {
@@ -172,8 +170,8 @@ const commentFragment = `
 export default ({config}) => resource({
     /** GET / - List all entities */
     index({params}, res) {
-      const queryPost = ` 
-        {
+      const queryPost =
+        `{
           var(func: anyoftext(content.title, "${params.query}"), first: ${params.first}, offset: ${params.offset}) {
               p as _uid_
           }
@@ -208,8 +206,8 @@ export default ({config}) => resource({
 
     /** GET /:id - Return a given entity */
     read({id}, res) {
-      const queryPost = ` 
-        fetchPost(func: uid(${id})) {
+      const queryPost =
+        `fetchPost(func: uid(${id})) {
           ${basePost}
           body: content.body
           

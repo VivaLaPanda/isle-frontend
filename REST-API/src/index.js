@@ -40,7 +40,12 @@ let reqOpts = {
 
 // Make sure the newest schema is loaded in
 reqOpts.body = Schema.schemaQuery;
-rp(reqOpts);
+rp(reqOpts)
+  .then((queryRes) => {
+    if (queryRes.data === null) {
+      console.error(queryRes.errors);
+    }
+  });
 
 app.server.listen(process.env.PORT || config.port, () => {
 	console.log(`Started on port ${app.server.address().port}`);
