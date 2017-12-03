@@ -47,8 +47,8 @@ export default ({config}) => resource({
       return rp(reqOpts)
         .then((queryRes) => {
           if (queryRes.data === null) {
-            console.error(queryRes.error);
-            res.status(500).json(queryRes.error);
+            console.error(queryRes.errors);
+            res.status(500).json(queryRes.errors);
 
             return;
           }
@@ -78,8 +78,8 @@ export default ({config}) => resource({
       return rp(reqOpts)
         .then((queryRes) => {
           if (queryRes.data === null) {
-            console.error(queryRes.error);
-            res.status(500).json(queryRes.error);
+            console.error(queryRes.errors);
+            res.status(500).json(queryRes.errors);
 
             return;
           }

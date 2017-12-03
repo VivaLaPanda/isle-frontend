@@ -29,7 +29,7 @@ const makePost = function(body, res) {
   return rp(reqOpts)
     .then((queryRes) => {
       if (queryRes.data === null) {
-        res.status(500).json(queryRes.error);
+        res.status(500).json(queryRes.errors);
 
         return;
       }
@@ -84,16 +84,16 @@ const makeComment = function(body, res) {
 
   reqOpts.body = fetchContentTree;
   rp(reqOpts)
-    .then((parentTree) => {
-      if (parentTree.data === null) {
-        console.error(parentTree.error);
-        res.status(500).json(parentTree.error);
+    .then((queryRes) => {
+      if (queryRes.data === null) {
+        console.error(queryRes.errors);
+        res.status(500).json(queryRes.errors);
 
         return;
       }
 
       let treeArr = [{sentiment: body.sentiment}];
-      treeArr = buildParentTree(parentTree.data, treeArr);
+      treeArr = buildParentTree(queryRes.data, treeArr);
 
       // Walk the flattened tree and calc reputation/score
       let workingSentiment = body.sentiment;
@@ -138,8 +138,8 @@ const makeComment = function(body, res) {
     })
     .then((queryRes) => {
       if (queryRes.data === null) {
-        console.error(queryRes.error);
-        res.status(500).json(queryRes.error);
+        console.error(queryRes.errors);
+        res.status(500).json(queryRes.errors);
 
         return;
       }
@@ -187,8 +187,8 @@ export default ({config}) => resource({
       return rp(reqOpts)
         .then((queryRes) => {
           if (queryRes.data === null) {
-            console.error(queryRes.error);
-            res.status(500).json(queryRes.error);
+            console.error(queryRes.errors);
+            res.status(500).json(queryRes.errors);
 
             return;
           }
@@ -229,8 +229,8 @@ export default ({config}) => resource({
       return rp(reqOpts)
         .then((queryRes) => {
           if (queryRes.data === null) {
-            console.error(queryRes.error);
-            res.status(500).json(queryRes.error);
+            console.error(queryRes.errors);
+            res.status(500).json(queryRes.errors);
 
             return;
           }
