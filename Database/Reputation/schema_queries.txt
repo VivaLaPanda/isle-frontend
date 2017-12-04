@@ -1,42 +1,165 @@
+# Create Schema
 mutation {
   schema {
     # Used to differentiate between the below types
     type: string @index(hash) .
     
     # User
-    username: string @index(exact) .
-    password: password .
-    email: string @index(hash) .
-    avi_img: string .
-    reputation: int .
-    role: uid .
-    invited_by: uid .
-    joined: dateTime .
-    posted: uid @reverse @count .
-    commented: uid @reverse @count .
+    user.name: string @index(exact) .
+    user.password: password .
+    user.email: string @index(hash) .
+    user.aviImgUri: string .
+    user.reputation: int .
+    user.role: uid .
+    user.invitedBy: uid .
+    user.joined: dateTime .
+    user.posted: uid @reverse @count .
+    user.commented: uid @reverse @count .
     
     # Role
-    role_text: string @index(hash) .
+    role.text: string @index(hash) .
     
     # Post/Comment
-    title: string @index(fulltext) .
-    image: string .
-    body: string @index(fulltext) . 
-    posted: dateTime .
-    tags: uid .
-    score: int .
-    is_positive: bool .
-    children: uid @count .
+    content.title: string @index(fulltext) .
+    content.imageUri: string .
+    content.body: string @index(fulltext) . 
+    content.created: dateTime .
+    content.tags: uid @reverse .
+    content.score: int .
+    content.sentiment: int .
+    content.children: uid @count .
     
     # Tag
-    tag_text: string @index(hash) .
+    tag.text: string @index(hash) .
     
     # Purchasables
-    purchaseable_name: string .
-    cost: int .
+    sellable.name: string .
+    sellable.cost: int .
     
     # Invites
-    invite_code: string @index(hash) .
-    used: bool .
+    invite.code: string @index(hash) .
+    invite.used: bool .
+	invite.createdBy: uid .
   }
+}
+
+
+
+# Create User
+# input {name:string, password:string, email:string, invited_by: string(uid), joined: datetime}
+# Default rep is 100
+mutation {
+	set {
+		_:newUser <user.name> ${name} .
+		_:newUser <user.password> ${password} .
+		_:newUser <user.email> ${email} .
+		_:newUser <user.invited_by> <${invited_by}> .
+		_:newUser <user.joined> ${joined} .
+		_:newUser <user.reputation> 100 .
+	}
+}
+
+# Fetch User
+# input {uid: string}
+{
+	fetchUser(func: uid(${uid})) {
+    user.name@.
+    user.email@.
+    user.joined
+    user.commented {
+		content.title@.
+	}
+	user.posted {
+		content.title@.
+	}
+  }  
+}
+
+# Create Post 
+# input {title: string, imageUri: string, body: string, created: dateTime, postedBy: string, tags: []uid, currentRep: int}
+
+mutation {
+	set {
+		_:newPost <content.title> ${title} .
+		_:newPost <content.imageUri> ${imageUri} .
+		_:newPost <content.body> ${body} .
+		_:newPost <content.created> ${created} .
+		_:newPost <content.score> 1 .
+		<${postedBy}> <user.posted> _:newPost .
+		<${postedBy}> <user.reputation> ${currentRep+1}
+		_:newPost <content.tags> ${i.uid} # This gets looped
+	}
+}
+
+#### Content fragments
+
+# Post base
+title: content.title@.
+imageUri: content.imageUri
+timestamp: content.created
+score: content.score
+submitted: ~user.posted {
+	user.name@.
+}
+tags: content.tags {
+	tag.text
+}
+numComments: count(content.children)
+
+# Comment fragment
+score: content.score
+text: content.body
+sentiment: content.sentiment
+commented: ~user.posted {
+	user.name@.
+}
+
+### End fragments
+
+# Query posts ordered by date
+# input {tags: string[], query: string, first: int, offset: int}
+{
+	var(func: eq(tag.Text, ["${i.tagName}"])) @filter(anyoftext(content.title, ${query})) {
+		p as ~tag(first: ${first}, offset: ${offset})
+	}
+
+	queryPosts(func: uid(p), orderasc: content.created) {
+		# Post base
+	}
+}
+
+# Fetch specific post
+# input {uid: uid}
+{
+	fetchPost(func: uid($uid)) {
+		# Post base
+		body: content.body
+		
+		## Print out 3 layers of comments
+		comments: content.children {
+			# Comment fragment
+				comments: content.children {
+					# Comment fragment
+					comments: content.children {
+						# Comment fragment
+					}
+				}
+		}
+	}
+}
+
+# Get more comments starting at given root
+# input {uid: uid}
+{
+	moreComments(func: uid($uid)) {
+		comments: content.children {
+			# Comment fragment
+			comments: content.children {
+				# Comment fragment
+				comments: content.children {
+					# Comment fragment
+				}
+			}
+		}
+	}
 }
