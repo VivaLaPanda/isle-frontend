@@ -10,6 +10,7 @@ mutation {
     user.email: string @index(hash) .
     user.aviImgUri: string .
     user.reputation: int .
+	user.spent: int .
     user.role: uid .
     user.invitedBy: uid .
     user.joined: dateTime .
@@ -38,23 +39,46 @@ mutation {
     
     # Invites
     invite.code: string @index(hash) .
-    invite.used: bool .
 	invite.createdBy: uid .
   }
 }
 
+# Create invite
+# input {user: uid, spent: int, randCode: string}
+mutation {
+	set {
+		<${user}> <user.spent> ${spent} .
+		_:newInvite <invite.code> ${randCode} .
+		_:newInvite <invite.createdBy> <${user}> .
+	}
+}
 
+# Check invite
+# input {inviteCode: string}
+{
+	queryInvite(func: eq(invite.code, ${inviteCode})) {
+		uid: _uid_
+		createdBy: invite.createdBy
+	}
+}
+# Use invite (After you create the user successfully)
+# input {invite: uid}
+mutation {
+	delete {
+		<${invite}> * *
+	}
+}
 
 # Create User
 # input {name:string, password:string, email:string, invited_by: string(uid), joined: datetime}
 # Default rep is 100
 mutation {
 	set {
-		_:newUser <user.name> ${name} .
-		_:newUser <user.password> ${password} .
-		_:newUser <user.email> ${email} .
+		_:newUser <user.name> "${name}" .
+		_:newUser <user.password> "${password}" .
+		_:newUser <user.email> "${email}" .
 		_:newUser <user.invited_by> <${invited_by}> .
-		_:newUser <user.joined> ${joined} .
+		_:newUser <user.joined> "${joined}" .
 		_:newUser <user.reputation> 100 .
 	}
 }
@@ -63,13 +87,14 @@ mutation {
 # input {uid: string}
 {
 	fetchUser(func: uid(${uid})) {
-    user.name@.
-    user.email@.
-    user.joined
-    user.commented {
+    name: user.name@.
+    email: user.email@.
+    joined: user.joined
+	reputation: user.reputation
+    commented: user.commented {
 		content.title@.
 	}
-	user.posted {
+	posted: user.posted {
 		content.title@.
 	}
   }  
@@ -80,10 +105,10 @@ mutation {
 
 mutation {
 	set {
-		_:newPost <content.title> ${title} .
-		_:newPost <content.imageUri> ${imageUri} .
-		_:newPost <content.body> ${body} .
-		_:newPost <content.created> ${created} .
+		_:newPost <content.title> "${title}" .
+		_:newPost <content.imageUri> "imageUri}" .
+		_:newPost <content.body> "${body}" .
+		_:newPost <content.created> "${created}" .
 		_:newPost <content.score> 1 .
 		<${postedBy}> <user.posted> _:newPost .
 		<${postedBy}> <user.reputation> ${currentRep+1}
@@ -119,7 +144,7 @@ commented: ~user.posted {
 # Query posts ordered by date
 # input {tags: string[], query: string, first: int, offset: int}
 {
-	var(func: eq(tag.Text, ["${i.tagName}"])) @filter(anyoftext(content.title, ${query})) {
+	var(func: eq(tag.Text, ["${i.tagName}"])) @filter(anyoftext(content.title, "${query}")) {
 		p as ~tag(first: ${first}, offset: ${offset})
 	}
 
