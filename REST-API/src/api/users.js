@@ -58,7 +58,7 @@ export default ({config}) => resource({
           }
 
           console.log(queryRes);
-          res.send(queryRes.data);
+          res.send({message: queryRes.data});
         })
     },
 
@@ -94,7 +94,7 @@ export default ({config}) => resource({
           }
 
           console.log(queryRes);
-          res.send(queryRes.data);
+          res.send({message: queryRes.data});
         })
     }
     //
