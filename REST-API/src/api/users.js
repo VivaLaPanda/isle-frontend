@@ -86,6 +86,7 @@ export default ({config}) => resource({
       reqOpts.uri = Constants.dbUrl + 'query';
       return rp(reqOpts)
         .then((queryRes) => {
+          queryRes = JSON.parse(queryRes);
           if (queryRes.errors) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
