@@ -41,6 +41,7 @@ let reqOpts = {
 reqOpts.body = Schema.schemaQuery;
 rp(reqOpts)
   .then((queryRes) => {
+    queryRes = JSON.parse(queryRes);
     if (queryRes.errors !== undefined) {
       console.error(queryRes.errors);
     }

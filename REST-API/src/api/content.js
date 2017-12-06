@@ -4,14 +4,13 @@ const rp = require('request-promise');
 
 let reqOpts = {
   method: 'POST',
-  uri: Constants.dbUrl + 'query',
   json: true,
 };
 
 const makePost = function(body, res) {
   // Add the post
   let createPost =
-        `mutation {
+        `{
           set {
             _:newPost <content.title> "${body.title}" .
             _:newPost <content.imageUri> "${body.imageUri}" .
@@ -23,10 +22,11 @@ const makePost = function(body, res) {
         }`;
 
   // TODO: Tags
-
+  reqOpts.uri = Constants.dbUrl + 'mutate';
   reqOpts.body = createPost;
   return rp(reqOpts)
     .then((queryRes) => {
+      queryRes = JSON.parse(queryRes);
       if (queryRes.data === null) {
         res.status(500).json(queryRes.errors);
 
@@ -81,9 +81,11 @@ const makeComment = function(body, res) {
           }  
         }`;
 
+  reqOpts.uri = Constants.dbUrl + 'query';
   reqOpts.body = fetchContentTree;
   rp(reqOpts)
     .then((queryRes) => {
+      queryRes = JSON.parse(queryRes);
       if (queryRes.data === null) {
         console.error(queryRes.errors);
         res.status(500).json(queryRes.errors);
@@ -111,14 +113,12 @@ const makeComment = function(body, res) {
 
       // Add the post
       let createPost =
-            `mutation {
+            `{
               set {
                 _:newPost <content.body> "${body.body}" .
                 _:newPost <content.created> "${new Date()}" .
                 _:newPost <content.score> 0 .
                 <${body.userId}> <user.commented> _:newPost .
-              }
-            }
           `;
 
       // Put together the score/rep changes
@@ -130,12 +130,18 @@ const makeComment = function(body, res) {
         }
       });
 
+      createPost.concat(`
+              }
+            }`);
+
       // TODO: Tags
 
+      reqOpts.uri = Constants.dbUrl + 'mutate';
       reqOpts.body = createPost;
       return rp(reqOpts);
     })
     .then((queryRes) => {
+      queryRes = JSON.parse(queryRes);
       if (queryRes.data === null) {
         console.error(queryRes.errors);
         res.status(500).json(queryRes.errors);
@@ -181,9 +187,11 @@ export default ({config}) => resource({
           }
         }`;
 
+      reqOpts.uri = Constants.dbUrl + 'query';
       reqOpts.body = queryPost;
       return rp(reqOpts)
         .then((queryRes) => {
+          queryRes = JSON.parse(queryRes);
           if (queryRes.data === null) {
             console.error(queryRes.errors);
             res.status(500).json(queryRes.errors);
@@ -223,9 +231,11 @@ export default ({config}) => resource({
           }
 	    }`;
 
+      reqOpts.uri = Constants.dbUrl + 'query';
       reqOpts.body = queryPost;
       return rp(reqOpts)
         .then((queryRes) => {
+          queryRes = JSON.parse(queryRes);
           if (queryRes.data === null) {
             console.error(queryRes.errors);
             res.status(500).json(queryRes.errors);

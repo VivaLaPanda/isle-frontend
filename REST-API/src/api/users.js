@@ -50,6 +50,7 @@ export default ({config}) => resource({
       reqOpts.uri = Constants.dbUrl + 'mutate';
       return rp(reqOpts)
         .then((queryRes) => {
+          queryRes = JSON.parse(queryRes);
           if (queryRes.errors !== undefined) {
             console.error(queryRes.errors);
             res.status(500).send(queryRes.errors);
