@@ -26,6 +26,7 @@ const makePost = function(body, res) {
   reqOpts.body = createPost;
   return rp(reqOpts)
     .then((queryRes) => {
+      console.log(queryRes);
       queryRes = JSON.parse(queryRes);
       if (queryRes.data === null) {
         res.status(500).json(queryRes.errors);
@@ -213,7 +214,8 @@ export default ({config}) => resource({
     },
 
     /** GET /:id - Return a given entity */
-    read({id}, res) {
+    read(req, res) {
+      const id = req.params[undefined];
       const queryPost =
         `fetchPost(func: uid(${id})) {
           ${basePost}

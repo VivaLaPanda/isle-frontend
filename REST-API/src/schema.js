@@ -1,7 +1,6 @@
 export class Schema {
   static get schemaQuery() {
-    return `{
-        schema {
+    return `
           # Used to differentiate between the below types
           type: string @index(hash) .
           
@@ -40,8 +39,6 @@ export class Schema {
           
           # Invites
           invite.code: string @index(hash) .
-          invite.createdBy: uid .
-        }
-      }`
+          invite.createdBy: uid .`
   }
 }
