@@ -31,11 +31,11 @@ const makePost = function(body, res) {
       console.log(queryRes);
       queryRes = JSON.parse(queryRes);
       if (queryRes.data === null) {
-        res.status(500).json(queryRes.errors);
+        res.status(500).send(queryRes.errors);
 
         return;
       }
-      res.status(204).json(queryRes.data);
+      res.send({message: queryRes.data});
     })
 };
 
@@ -91,7 +91,7 @@ const makeComment = function(body, res) {
       queryRes = JSON.parse(queryRes);
       if (queryRes.data === null) {
         console.error(queryRes.errors);
-        res.status(500).json(queryRes.errors);
+        res.status(500).send(queryRes.errors);
 
         return;
       }
@@ -119,8 +119,8 @@ const makeComment = function(body, res) {
             `{
               set {
                 _:newPost <content.body> "${body.body}" .
-                _:newPost <content.created> "${new Date()}" .
-                _:newPost <content.score> 0 .
+                _:newPost <content.created> "${(new Date()).toISOString()}" .
+                _:newPost <content.score> "0" .
                 <${body.userId}> <user.commented> _:newPost .
           `;
 
@@ -139,6 +139,8 @@ const makeComment = function(body, res) {
 
       // TODO: Tags
 
+      console.log(createPost);
+
       reqOpts.uri = Constants.dbUrl + 'mutate';
       reqOpts.body = createPost;
       return rp(reqOpts);
@@ -147,11 +149,11 @@ const makeComment = function(body, res) {
       queryRes = JSON.parse(queryRes);
       if (queryRes.data === null) {
         console.error(queryRes.errors);
-        res.status(500).json(queryRes.errors);
+        res.status(500).send(queryRes.errors);
 
         return;
       }
-      res.status(200).json(queryRes.data);
+      res.send({message: queryRes.data});
     })
 };
 
