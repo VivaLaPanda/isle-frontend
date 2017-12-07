@@ -1,10 +1,8 @@
 export class Schema {
   static get schemaQuery() {
     return `
-          # Used to differentiate between the below types
           type: string @index(hash) .
           
-          # User
           user.name: string @index(exact) .
           user.password: password .
           user.email: string @index(hash) .
@@ -17,10 +15,8 @@ export class Schema {
           user.posted: uid @reverse @count .
           user.commented: uid @reverse @count .
           
-          # Role
           role.text: string @index(hash) .
           
-          # Post/Comment
           content.title: string @index(fulltext) .
           content.imageUri: string .
           content.body: string @index(fulltext) . 
@@ -30,14 +26,11 @@ export class Schema {
           content.sentiment: int .
           content.children: uid @reverse @count .
           
-          # Tag
           tag.text: string @index(hash) .
           
-          # Purchasables
           sellable.name: string .
           sellable.cost: int .
           
-          # Invites
           invite.code: string @index(hash) .
           invite.createdBy: uid .`
   }

@@ -15,8 +15,8 @@ const makePost = function(body, res) {
             _:newPost <content.title> "${body.title}" .
             _:newPost <content.imageUri> "${body.imageUri}" .
             _:newPost <content.body> "${body.body}" .
-            _:newPost <content.created> "${new Date()}" .
-            _:newPost <content.score> 0 .
+            _:newPost <content.created> "${(new Date()).toISOString()}" .
+            _:newPost <content.score> "0" .
             <${body.userId}> <user.commented> _:newPost .
           }
         }`;
