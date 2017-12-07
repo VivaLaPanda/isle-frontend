@@ -4,7 +4,9 @@ const rp = require('request-promise');
 
 let reqOpts = {
   method: 'POST',
-  json: true,
+  headers: {
+    'X-Dgraph-CommitNow': 'true'
+  }
 };
 
 const makePost = function(body, res) {
