@@ -5,7 +5,6 @@ const rp = require('request-promise');
 let reqOpts = {
   method: 'POST',
   uri: Constants.dbUrl + 'query',
-  json: true,
 };
 
 export default ({config}) => resource({

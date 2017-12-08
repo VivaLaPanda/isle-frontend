@@ -35,7 +35,6 @@ app.use('/api', api({ config }));
 let reqOpts = {
   method: 'POST',
   uri: Constants.dbUrl + 'query',
-  json: true,
 };
 
 // Make sure the newest schema is loaded in
