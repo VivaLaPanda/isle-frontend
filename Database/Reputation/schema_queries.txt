@@ -28,7 +28,7 @@ mutation {
     content.tags: uid @reverse .
     content.score: int .
     content.sentiment: int .
-    content.children: uid @count .
+    content.children: uid @reverse @count .
     
     # Tag
     tag.text: string @index(hash) .
@@ -115,6 +115,9 @@ mutation {
 		_:newPost <content.tags> ${i.uid} # This gets looped
 	}
 }
+
+# Create Comment
+# input {title: string, body: string, created: dateTime, postedBy: string, tags: []uid, currentRep: int}
 
 #### Content fragments
 
