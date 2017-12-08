@@ -1,23 +1,26 @@
-# Use latest version of node v8
-FROM node:8.4.0
+FROM alpine:3.4
 
-#create an app directory
-RUN mkdir /app
+# File Author / Maintainer
+LABEL authors="Zouhir Chahoud <zouhir@zouhir.org>"
 
-#make /app as the working directory
-WORKDIR /app
+# Update & install required packages
+RUN apk add --update nodejs bash git
 
-COPY package.json yarn.lock /app/
+# Install app dependencies
+COPY package.json /www/package.json
+RUN cd /www; npm install
 
-# update the package manager, install git.
-# install all the prod dependency and remove the unnnecessary packages again to make the build size small.
-# --pure-lockfile: Don’t generate a yarn.lock lockfile
-RUN yarn --production --pure-lockfile
+# Copy app source
+COPY . /www
 
-COPY . /app/
+# Set work directory to /www
+WORKDIR /www
 
-#expose default port of the docker to 3000
-EXPOSE 3030
+# set your port
+ENV PORT 8080
 
-#runs this command when the container is created, can be overriden in the docker-compose.yml
-CMD ["yarn", "start"]
+# expose the port to outside world
+EXPOSE  8080
+
+# start command as per package.json
+CMD ["npm", "start"]
