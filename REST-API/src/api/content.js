@@ -106,6 +106,8 @@ const makeComment = function(body, res) {
         const delta = (workingSentiment/idx) * treeArr[idx-1].sentiment;
         workingSentiment = workingSentiment * treeArr[idx-1].sentiment;
         post.score = post.score + delta;
+        console.log(post.poster);
+        console.log(post.poster.parent);
         post.poster.rep = post.poster.rep + delta;
         if (post.poster.parent) {
           post.poster.parent.rep = post.poster.parent.rep + (delta / 2);
