@@ -48,7 +48,19 @@ const buildParentTree = function(parentTree, treeArr) {
   });
   if (parentTree.parent) {
     parentTree = parentTree.parent;
-    treeArr = buildParentTree(parentTree, treeArr)
+    treeArr.push({
+      sentiment: parentTree.sentiment,
+      score: parentTree.score,
+      poster: parentTree.poster
+    });
+    if (parentTree.parent) {
+      parentTree = parentTree.parent;
+      treeArr.push({
+        sentiment: parentTree.sentiment,
+        score: parentTree.score,
+        poster: parentTree.poster
+      });
+    }
   }
 
   return treeArr;
@@ -106,8 +118,6 @@ const makeComment = function(body, res) {
         const delta = (workingSentiment/idx) * treeArr[idx-1].sentiment;
         workingSentiment = workingSentiment * treeArr[idx-1].sentiment;
         post.score = post.score + delta;
-        console.log(post.poster);
-        console.log(post.poster.parent);
         post.poster.rep = post.poster.rep + delta;
         if (post.poster.parent) {
           post.poster.parent.rep = post.poster.parent.rep + (delta / 2);
