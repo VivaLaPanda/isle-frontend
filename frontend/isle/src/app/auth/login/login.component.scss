@@ -1,0 +1,30 @@
+#login-container {
+  min-height: 100%;
+  background-image: url('/assets/images/golden-gate-bw.jpg');
+  background-size: cover;
+
+  .login-card {
+    padding: 0 !important;
+    min-width: 20em;
+    margin-left: auto;
+    margin-right: auto;
+
+    .mat-card-content {
+      padding: 16px;
+    }
+
+    .login {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin-left: auto;
+        width: 50%;
+      }
+
+      * {
+        width: 100%;
+      }
+    }
+  }
+}

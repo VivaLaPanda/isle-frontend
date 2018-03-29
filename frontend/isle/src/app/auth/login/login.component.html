@@ -1,0 +1,31 @@
+<div id="login-container" fxLayout="column">
+  <div fxFlex ></div>
+  <mat-card class="login-card" fxFlex >
+    <mat-toolbar color="primary">Webtimer</mat-toolbar>
+    <mat-card-content>
+      <form #loginForm="ngForm" class="login" (ngSubmit)="login()" >
+        <mat-form-field>
+          <input matInput
+                 type="text"
+                 required
+                 placeholder="Username"
+                 name="username"
+                 [(ngModel)]="userModel.username">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="password"
+                 required
+                 placeholder="Password"
+                 name="password"
+                 [(ngModel)]="userModel.password">
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <br/>
+        <button mat-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Log In</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <div fxFlex ></div>
+</div>

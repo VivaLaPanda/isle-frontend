@@ -1,0 +1,13 @@
+{
+  "name": "WebTimer",
+  "short_name": "WebTimer",
+  "icons": [{
+    "src": "/assets/images/icons/icon.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "start_url": "/?utm_source=homescreen",
+  "display": "standalone",
+  "background_color": "#E3F2FD",
+  "theme_color": "#1976D2"
+}
