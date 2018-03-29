@@ -1,0 +1,8 @@
+insert into User (user, pass, email, role, isArchived)
+select a.client as user, a.password, null as email, 'CLIENT' as role, a.hide as isArchived from `Client` a;
+
+insert into User (user, pass, email, role, isArchived)
+select a.user as user, a.password, null as email, 'EMPLOYEE' as role, False as isArchived from `User-old` a;
+
+insert into User (user, pass, email, role, isArchived)
+select a.admin as user, a.password as pass, a.email, 'SUPERADMIN' as role, False as isArchived from Admin a;
