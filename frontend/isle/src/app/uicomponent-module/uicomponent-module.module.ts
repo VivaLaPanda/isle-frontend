@@ -1,12 +1,30 @@
 import {
-  MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDatepickerModule,
-  MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule,
-  MatOptionModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatToolbarModule
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatToolbarModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CovalentTextEditorModule } from '@covalent/text-editor';
 
 // Module used to bundle together out imports for UI components such as Angular Material
 @NgModule({
@@ -31,8 +49,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatNativeDateModule,
     MatAutocompleteModule,
     MatSlideToggleModule,
+    MatExpansionModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    CovalentTextEditorModule,
   ],
   exports: [
     FormsModule,
@@ -54,9 +74,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatSlideToggleModule,
+    MatExpansionModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    CovalentTextEditorModule,
   ],
 })
 export class UIComponentModule {}

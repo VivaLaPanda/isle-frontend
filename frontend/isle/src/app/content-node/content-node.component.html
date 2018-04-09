@@ -7,26 +7,45 @@
         <div class="content-body" fxFlex [innerHTML]="content.body | MarkdownToHtml">
         </div>
         <div fxLayout="row" class="minor-content mat-caption">
-          <div fxLayout="column">
+          <div fxLayout="column" fxFlex="100">
             <div class="posted-by" fxLayout="row" fxLayoutAlign="start center">
               <div class="sentiment" fxLayoutAlign="center center" *ngIf="content.sentiment !== undefined">
                 <mat-icon *ngIf="content.sentiment > 0">add_circle</mat-icon>
                 <mat-icon *ngIf="content.sentiment == 0">fiber_manual_record</mat-icon>
                 <mat-icon *ngIf="content.sentiment < 0">remove_circle</mat-icon>
               </div>
-              Posted by <b>{{content.poster.name + " "}}</b>{{content.posted | timeAgo}}  —  <b>{{content.reputation}}</b> points
+              &nbsp;Posted by&nbsp;<b>{{content.poster.name}}</b>&nbsp;{{content.posted | timeAgo}}  —&nbsp;<b>{{content.reputation}}</b>&nbsp;points
             </div>
             <div class="actions" fxLayout="row" fxLayoutAlign="start center">
-              <button mat-icon-button>
+              <button mat-icon-button (click)="expandReply()">
                 <mat-icon aria-label="Reply to comment">reply</mat-icon>
               </button>
+            </div>
+            <div class="reply" fxLayout="column" fxLayoutAlign="center start" [@toggleReply]="replyState">
+              <td-text-editor [(value)]="reply.body" [options]="replyFieldOptions" class="full-width"></td-text-editor>
+              <div class="comment-action full-width" fxLayout="row" fxLayoutAlign="start center">
+                <mat-button-toggle-group #sentiment="matButtonToggleGroup" [(value)]="reply.sentiment">
+                  <mat-button-toggle value="1">
+                    <mat-icon>add_circle</mat-icon>
+                  </mat-button-toggle>
+                  <mat-button-toggle value="0">
+                    <mat-icon>fiber_manual_record</mat-icon>
+                  </mat-button-toggle>
+                  <mat-button-toggle value="-1">
+                    <mat-icon>remove_circle</mat-icon>
+                  </mat-button-toggle>
+                </mat-button-toggle-group>
+                <span fxFlex></span>
+                <button mat-button color="warn" (click)="collapseReply()">Cancel</button>
+                <button mat-button color="primary">Submit</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="rep-indicator indicator-bar" [style.backgroundColor]="repToColor()" fxFlex="1"></div>
+  <div class="rep-indicator indicator-bar" [style.backgroundColor]="repToColor()" [style.opacity]="repToOpacity()" fxFlex="1"></div>
 </mat-card>
 <div fxLayout="row" fxLayoutAlign=" start">
   <div fxFlex="1"></div>

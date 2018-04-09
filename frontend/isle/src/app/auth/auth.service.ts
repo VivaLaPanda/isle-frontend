@@ -5,7 +5,6 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 import {HttpClient} from '@angular/common/http';
-import {Constants} from '../../../../../../webtimer-frontend/src/app/constants';
 
 function parseJwt(token) {
   const base64Url = token.split('.')[1];

@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@angular/service-worker": "^5.2.0",
+    "@covalent/text-editor": "^1.0.0",
     "angularfire2": "^5.0.0-rc.6",
     "color-between": "^1.0.2",
     "core-js": "^2.4.1",
