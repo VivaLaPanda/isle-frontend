@@ -22,7 +22,6 @@ export class ContentNodeComponent implements OnInit {
 
   ngOnInit() {
     // Get Content node that corresponds to the given UID
-    console.log(this.content.sentiment);
   }
 
   // Will cycle through colors as content depth increases
