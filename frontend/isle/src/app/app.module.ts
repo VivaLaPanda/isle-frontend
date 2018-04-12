@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './router/app-routing.module';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
@@ -13,10 +13,28 @@ import { CategoryComponent } from './category/category.component';
 import { LoginComponent } from './auth/login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {UIComponentModule} from './uicomponent-module/uicomponent-module.module';
-import {TimeAgoPipe} from 'time-ago-pipe';
 import {MarkdownToHtmlModule} from 'markdown-to-html-pipe';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
+import * as Raven from 'raven-js';
+import {ErrorHandler} from 'protractor/built/exitCodes';
+import {SignupComponent} from './auth/signup/signup.component';
+import {EmailComponent} from './auth/email/email.component';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AngularFireModule} from 'angularfire2';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+
+if (environment.production) {
+  Raven
+    .config('https://60acaf5d8ce44b5e8e9d8ecd460a0895@sentry.io/1187729')
+    .install();
+}
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    Raven.captureException(err);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -26,9 +44,16 @@ import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
     CategoryComponent,
     TimeAgoPipe,
     LoginComponent,
-    UserProfileComponent
+    SignupComponent,
+    EmailComponent,
+    UserProfileComponent,
+    TimeAgoPipe
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule,
+    // AngularFireStorageModule, // imports firebase/storage only needed for storage features
     BrowserModule,
     AppRoutingModule,
     UIComponentModule,
@@ -36,7 +61,10 @@ import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     Angulartics2Module.forRoot([ Angulartics2GoogleTagManager ])
   ],
-  providers: [],
+  providers: [environment.production ? {
+    provide: ErrorHandler,
+    useClass: RavenErrorHandler,
+  } : []],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

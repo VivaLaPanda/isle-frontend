@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
   private config = {
     interface: {
+      appName: 'Test Isle',
       contentNode: {
         showNumericReputation: false,
       }
     }
-  }
+  };
 
   constructor() { }
 

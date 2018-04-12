@@ -1,0 +1,34 @@
+<div fxLayout="column">
+  <div fxFlex ></div>
+  <mat-card class="login-card" fxFlex >
+    <mat-toolbar color="primary">
+      <span>Email Login</span>
+      <span class="spacer"></span>
+      <button mat-icon-button>
+        <mat-icon class="icon" (click)="closeDialog()">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-card-content>
+      <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+        <mat-form-field>
+          <input matInput
+                 type="email"
+                 placeholder="Email address"
+                 name="email"
+                 required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 type="password"
+                 required
+                 placeholder="Password"
+                 name="password">
+        </mat-form-field>
+
+        <button mat-button type="submit" [disabled]="!formData.valid" class="basic-btn">Log in</button>
+        <a mat-button routerLink="/signup">Don't have an account?</a>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <div fxFlex ></div>
+</div>

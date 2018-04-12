@@ -4,7 +4,7 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon class="md-24" >menu</mat-icon>
     </button>
-    <span>Isle</span> <!-- App Name Here -->
+    <span>{{appName}}</span> <!-- App Name Here -->
     <span class="spacer"></span>
     <button mat-icon-button (click)="onSetTheme('light-theme')" *ngIf="isDarkMode">
       <mat-icon class="icon">wb_sunny</mat-icon>
@@ -14,13 +14,10 @@
     </button>
   </mat-toolbar>
   <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="{{navMode}}" class="mat-elevation-z8">
+    <mat-sidenav #sidenav [mode]="navMode" class="mat-elevation-z8">
       <!-- sidenav content -->
       <!--<app-sidenav></app-sidenav>-->
     </mat-sidenav>
-
-    <app-post></app-post>
-
     <!-- primary content -->
     <router-outlet></router-outlet>
 

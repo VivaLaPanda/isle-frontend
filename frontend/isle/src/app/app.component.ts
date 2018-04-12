@@ -4,13 +4,15 @@ import {NavigationEnd, Router} from '@angular/router';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {UserService} from './services/user.service';
 import {User} from './models/user';
+import {ConfigService} from './services/config.service';
+import * as Raven from 'raven-js';
 declare let ga: Function;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [UserService]
+  providers: [UserService, ConfigService]
 })
 export class AppComponent implements OnInit {
   isDarkMode;
@@ -18,17 +20,24 @@ export class AppComponent implements OnInit {
   navMode = 'side';
   @HostBinding('class') componentCssClass;
   userID: string;
+  appName: string;
 
-  constructor(private router: Router, public overlayContainer: OverlayContainer, private userService: UserService) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        ga('set', 'page', event.urlAfterRedirects);
-        ga('send', 'pageview');
-      }
-    });
+  constructor(
+    private router: Router,
+    public overlayContainer: OverlayContainer,
+    private configService: ConfigService,
+    private userService: UserService) {
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          ga('set', 'page', event.urlAfterRedirects);
+          ga('send', 'pageview');
+        }
+      });
   }
 
   ngOnInit() {
+    this.appName = this.configService.getConfig().interface.appName;
+
     if (window.innerWidth < 768) {
       this.navMode = 'over';
     }

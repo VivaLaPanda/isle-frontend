@@ -1,0 +1,31 @@
+<div class="form-container">
+  <a routerLink="/login" id="goback">Go back</a>
+
+  <h2>Join now</h2>
+
+  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+    <mat-form-field>
+      <input matInput
+        type="email"
+        placeholder="Email address"
+        name="email"
+        required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             type="password"
+             required
+             placeholder="Password"
+             name="password">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             type="text"
+             required
+             placeholder="Invite Code"
+             name="password">
+    </mat-form-field>
+
+    <button mat-button type="submit" [disabled]="!formData.valid" class="basic-btn">Create my account</button>
+  </form>
+</div>

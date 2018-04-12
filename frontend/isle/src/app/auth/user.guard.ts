@@ -2,10 +2,16 @@ import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import {AuthService} from './auth.service';
+import {AngularFireAuth} from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 @Injectable()
 export class UserGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private afAuth: AngularFireAuth, private authService: AuthService, private router: Router) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -15,7 +21,11 @@ export class UserGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.authService.isLoggedIn && (this.authService.role === 'EMPLOYEE' || this.authService.role === 'ADMIN')) { return true; }
+    if (this.afAuth.auth.currentUser) {
+      // TODO: Check the user's role
+      return true;
+    }
+    console.log('You tried access a route without proper credentials. Redirecting to login.');
 
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;

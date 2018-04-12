@@ -1,68 +1,51 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
+import * as firebase from 'firebase';
+import {AngularFireAuth} from 'angularfire2/auth';
 import {AuthService} from '../auth.service';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {ConfigService} from '../../services/config.service';
+import {EmailComponent} from '../email/email.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  message: string;
-  userModel: {
-    username: string;
-    password: string;
-  };
+  appName: string;
 
-  constructor(public authService: AuthService, public router: Router, public snackBar: MatSnackBar) {
-    this.setMessage();
-    this.userModel = {username: '', password: ''};
+  constructor(
+    public afAuth: AngularFireAuth,
+    private router: Router,
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private configService: ConfigService) {
   }
 
   ngOnInit() {
-    if (this.authService.isLoggedIn) {
-      // Get the redirect URL from our auth service
-      // If no redirect has been set, use the default
-      let redirect;
-      if (this.authService.role === 'CLIENT') {
-        redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/client-report';
-      } else {
-        redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
-      }
-
-      // Redirect the user
-      this.router.navigate([redirect]);
+    if (this.afAuth.auth.currentUser != null) {
+      this.router.navigateByUrl(this.authService.redirectUrl || '/');
     }
+    this.appName = this.configService.getConfig().interface.appName;
   }
 
-  setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
+  loginGoogle() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(auth => {
+      if(auth) {
+        this.router.navigateByUrl(this.authService.redirectUrl);
+      }
+    }, (err) => {
+      console.error(err);
+      this.snackBar.open('Failed to login: ' + err, null,{duration: 2000});
+    });
   }
 
-  login() {
-    this.message = 'Trying to log in ...';
-
-    this.authService.login(this.userModel.username, this.userModel.password).subscribe(() => {
-        this.setMessage();
-        if (this.authService.isLoggedIn) {
-          // Get the redirect URL from our auth service
-          // If no redirect has been set, use the default
-          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
-
-          // Redirect the user
-          this.router.navigate([redirect]);
-        }
-      },
-      err => {
-        console.log(err);
-        this.snackBar.open('Login Failed: ' + err.error.error, null, {duration: 2000});
-      });
-  }
-
-  logout() {
-    this.authService.logout();
-    this.setMessage();
+  loginEmail() {
+    const dialogRef = this.dialog.open(EmailComponent, {
+      height: 'auto',
+      width: '20em',
+    });
   }
 }
