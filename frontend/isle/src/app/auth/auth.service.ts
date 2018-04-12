@@ -20,7 +20,7 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
-  baseUrl: string = Constants.apiUrl + 'login';
+  baseUrl: string = "blah/" + 'login';
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('access_token');

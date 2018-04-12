@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Content} from '../models/content';
 import * as ColorBetween from 'color-between';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {ConfigService} from '../services/config.service';
 // Set of primary color codes that depthToColor cycles through
 const listOfColors = [
   '#3cba54',
@@ -14,6 +15,7 @@ const listOfColors = [
   selector: 'app-content-node',
   templateUrl: './content-node.component.html',
   styleUrls: ['./content-node.component.scss'],
+  providers: [ConfigService],
   animations:  [trigger(
     'toggleReply',
     [
@@ -27,6 +29,7 @@ export class ContentNodeComponent implements OnInit {
   @Input() content: Content;
   @Input() depth: number;
 
+  interfaceOptions: any;
 
   replyFieldOptions;
 
@@ -38,10 +41,11 @@ export class ContentNodeComponent implements OnInit {
   // Used for toggling reply
   replyState: string;
 
-  constructor() {}
+  constructor(private configService: ConfigService) {}
 
   ngOnInit() {
     this.collapseReply();
+    this.interfaceOptions = this.configService.getConfig().interface.contentNode;
     this.replyFieldOptions = {
       autofocus: true,
       autosave: {

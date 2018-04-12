@@ -1,20 +1,31 @@
 import {Component, HostBinding, HostListener, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {OverlayContainer} from '@angular/cdk/overlay';
+import {UserService} from './services/user.service';
+import {User} from './models/user';
+declare let ga: Function;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [UserService]
 })
 export class AppComponent implements OnInit {
   isDarkMode;
   @ViewChild('sidenav') sidenav: MatSidenav;
   navMode = 'side';
   @HostBinding('class') componentCssClass;
+  userID: string;
 
-  constructor(private router: Router, public overlayContainer: OverlayContainer) {
+  constructor(private router: Router, public overlayContainer: OverlayContainer, private userService: UserService) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+      }
+    });
   }
 
   ngOnInit() {
@@ -26,6 +37,11 @@ export class AppComponent implements OnInit {
     if (!(themePref)) {
       themePref = 'dark-theme';
     }
+
+    this.userService.testGetSelf().subscribe((user: User) => {
+      this.userID = user.uid;
+      ga('set', {'user_id': this.userID}); // Set the user ID using signed-in user_id.
+    });
 
     this.onSetTheme(themePref);
   }

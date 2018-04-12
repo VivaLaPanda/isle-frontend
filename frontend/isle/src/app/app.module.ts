@@ -10,10 +10,13 @@ import { environment } from '../environments/environment';
 import { ContentNodeComponent } from './content-node/content-node.component';
 import { PostComponent } from './post/post.component';
 import { CategoryComponent } from './category/category.component';
+import { LoginComponent } from './auth/login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {UIComponentModule} from './uicomponent-module/uicomponent-module.module';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {MarkdownToHtmlModule} from 'markdown-to-html-pipe';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import {MarkdownToHtmlModule} from 'markdown-to-html-pipe';
     PostComponent,
     CategoryComponent,
     TimeAgoPipe,
+    LoginComponent,
     UserProfileComponent
   ],
   imports: [
@@ -29,7 +33,8 @@ import {MarkdownToHtmlModule} from 'markdown-to-html-pipe';
     AppRoutingModule,
     UIComponentModule,
     MarkdownToHtmlModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    Angulartics2Module.forRoot([ Angulartics2GoogleTagManager ])
   ],
   providers: [],
   bootstrap: [AppComponent]
