@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/']);
         }, (err) => {
           console.log(err);
-          this.snackBar.open('Failed to login: ' + err, null,{duration: 2000});
+          this.snackBar.open('Failed to login: ' + err, null,{duration: 3000});
         });
     }
   }

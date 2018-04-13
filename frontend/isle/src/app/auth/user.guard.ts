@@ -10,7 +10,9 @@ import 'rxjs/add/operator/take';
 
 @Injectable()
 export class UserGuard implements CanActivate {
-  constructor(private afAuth: AngularFireAuth, private authService: AuthService, private router: Router) {}
+  constructor(private afAuth: AngularFireAuth, private authService: AuthService, private router: Router) {
+    this.afAuth.auth.setPersistence('local');
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -20,18 +22,20 @@ export class UserGuard implements CanActivate {
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): boolean {
-    if (this.afAuth.auth.currentUser) {
-      // TODO: Check the user's role
-      return true;
-    }
-    console.log('You tried access a route without proper credentials. Redirecting to login.');
+  checkLogin(url: string): Observable<boolean> {
+    return this.afAuth.authState.map((user: firebase.User) => {
+      if (user) {
+        // TODO: Check the user's role
+        return true;
+      }
+      console.log('You tried access a route without proper credentials. Redirecting to login.');
 
-    // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
+      // Store the attempted URL for redirecting
+      this.authService.redirectUrl = url;
 
-    // Navigate to the login page with extras
-    this.router.navigate(['/login']);
-    return false;
+      // Navigate to the login page with extras
+      this.router.navigate(['/login']);
+      return false;
+    });
   }
 }

@@ -6,11 +6,13 @@ import {AuthService} from '../auth.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {ConfigService} from '../../services/config.service';
 import {EmailComponent} from '../email/email.component';
+import {ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
   appName: string;
@@ -25,9 +27,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.afAuth.auth.currentUser != null) {
-      this.router.navigateByUrl(this.authService.redirectUrl || '/');
-    }
+    this.afAuth.authState.map((user: firebase.User) => {
+      if (user != null) {
+        this.router.navigateByUrl(this.authService.redirectUrl || '/');
+      }
+    });
     this.appName = this.configService.getConfig().interface.appName;
   }
 
@@ -38,14 +42,11 @@ export class LoginComponent implements OnInit {
       }
     }, (err) => {
       console.error(err);
-      this.snackBar.open('Failed to login: ' + err, null,{duration: 2000});
+      this.snackBar.open('Failed to login: ' + err, null,{duration: 3000});
     });
   }
 
   loginEmail() {
-    const dialogRef = this.dialog.open(EmailComponent, {
-      height: 'auto',
-      width: '20em',
-    });
+    const dialogRef = this.dialog.open(EmailComponent);
   }
 }

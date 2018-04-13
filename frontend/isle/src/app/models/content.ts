@@ -14,7 +14,7 @@ export class Content {
     this.uid = obj.uid;
     this.title = obj.title;
     this.body = obj.body;
-    this.poster = new User(obj.poster);
+    this.poster = new User().fromJSON(obj.poster);
     this.posted = new Date(obj.posted);
     this.reputation = obj.reputation;
     this.sentiment = obj.sentiment;

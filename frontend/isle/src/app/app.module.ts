@@ -23,6 +23,7 @@ import {EmailComponent} from './auth/email/email.component';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireModule} from 'angularfire2';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import {SidenavComponent} from './sidenav/sidenav.component';
 
 if (environment.production) {
   Raven
@@ -47,7 +48,8 @@ export class RavenErrorHandler implements ErrorHandler {
     SignupComponent,
     EmailComponent,
     UserProfileComponent,
-    TimeAgoPipe
+    SidenavComponent,
+    TimeAgoPipe,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

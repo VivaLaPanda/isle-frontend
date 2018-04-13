@@ -1,24 +1,30 @@
-.login-card {
-  padding: 0 !important;
-  min-width: 20em;
-  margin-left: auto;
-  margin-right: auto;
+#signup-container {
+  min-height: 100%;
+  background-image: url('/assets/images/golden-gate-bw.jpg');
+  background-size: cover;
 
-  .mat-card-content {
-    padding: 16px;
-  }
+  .signup-card {
+    padding: 0 !important;
+    min-width: 20em;
+    margin-left: auto;
+    margin-right: auto;
 
-  .login {
-    display: flex;
-    flex-direction: column;
-
-    button {
-      margin-left: auto;
-      width: 50%;
+    .mat-card-content {
+      padding: 16px;
     }
 
-    * {
-      width: 100%;
+    .signup {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin-left: auto;
+        width: 50%;
+      }
+
+      * {
+        width: 100%;
+      }
     }
   }
 }

@@ -1,0 +1,15 @@
+<mat-nav-list>
+  <h3 matSubheader>Test</h3>
+  <a mat-list-item class="nav-link"
+     routerLinkActive="active"
+     routerLink="/">
+    <mat-icon mat-list-icon>home</mat-icon>
+    <h3 mat-line>Test Post</h3>
+  </a>
+  <mat-divider></mat-divider>
+  <h3 matSubheader>Account - {{user?.name}}</h3>
+  <a mat-list-item class="nav-link" routerLinkActive="active" (click)="logout()">
+    <mat-icon mat-list-icon>person</mat-icon>
+    <h3 mat-line>Log Out</h3>
+  </a>
+</mat-nav-list>

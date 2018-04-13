@@ -1,31 +1,40 @@
-<div class="form-container">
-  <a routerLink="/login" id="goback">Go back</a>
+<div id="signup-container" fxLayout="column">
+  <div fxFlex ></div>
+  <mat-card class="signup-card" fxFlex >
+    <mat-toolbar color="primary">
+      Join this Isle
+      <span fxFlex></span>
+      <a mat-icon-button routerLink="/login">
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+    </mat-toolbar>
+    <mat-card-content>
+      <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" fxLayout="column">
+        <mat-form-field>
+          <input matInput
+                 type="email"
+                 placeholder="Email address"
+                 name="email"
+                 required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 type="password"
+                 required
+                 placeholder="Password"
+                 name="password">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+                 type="text"
+                 required
+                 placeholder="Invite Code"
+                 name="password">
+        </mat-form-field>
 
-  <h2>Join now</h2>
-
-  <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-    <mat-form-field>
-      <input matInput
-        type="email"
-        placeholder="Email address"
-        name="email"
-        required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput
-             type="password"
-             required
-             placeholder="Password"
-             name="password">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput
-             type="text"
-             required
-             placeholder="Invite Code"
-             name="password">
-    </mat-form-field>
-
-    <button mat-button type="submit" [disabled]="!formData.valid" class="basic-btn">Create my account</button>
-  </form>
+        <button mat-button type="submit" [disabled]="!formData.valid" class="basic-btn">Create my account</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <div fxFlex ></div>
 </div>

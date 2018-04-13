@@ -9,7 +9,7 @@ export class UserService {
   constructor() { }
 
   testGetSelf(): Observable<User> {
-    const MOCKACCOUNT = new User({
+    const MOCKACCOUNT = new User().fromJSON({
       uid: 'a0000',
       name: 'VivaLaPanda',
       aviUrl: 'foo.bar',

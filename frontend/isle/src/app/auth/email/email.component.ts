@@ -36,7 +36,7 @@ export class EmailComponent implements OnInit {
         this.router.navigate(['/members']);
       }, (err) => {
         console.log(err);
-        this.snackBar.open('Failed to login: ' + err, null,{duration: 2000});
+        this.snackBar.open('Failed to login: ' + err, null,{duration: 3000});
       });
     }
   }

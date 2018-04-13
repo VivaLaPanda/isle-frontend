@@ -21,9 +21,10 @@ export class AppComponent implements OnInit {
   @HostBinding('class') componentCssClass;
   userID: string;
   appName: string;
+  pageWidth: number;
 
   constructor(
-    private router: Router,
+    public router: Router,
     public overlayContainer: OverlayContainer,
     private configService: ConfigService,
     private userService: UserService) {
@@ -38,10 +39,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.appName = this.configService.getConfig().interface.appName;
 
-    if (window.innerWidth < 768) {
-      this.navMode = 'over';
-    }
-
     let themePref = localStorage.getItem('theme_pref');
     if (!(themePref)) {
       themePref = 'dark-theme';
@@ -53,6 +50,11 @@ export class AppComponent implements OnInit {
     });
 
     this.onSetTheme(themePref);
+
+    this.pageWidth = window.innerWidth;
+    if (window.innerWidth < 768) {
+      this.navMode = 'over';
+    }
   }
 
   onSetTheme(theme) {
