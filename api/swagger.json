@@ -1,0 +1,624 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is an API meant to interface with the Isle Network database to serve entities to a front-end interface. The reference server is written and Go and the reference client is in Javascript",
+    "version" : "0.1.0",
+    "title" : "Isle Network"
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/VivaLaPanda/Isle/1.0.0",
+  "schemes" : [ "https" ],
+  "security" : [ {
+    "application" : [ "read", "write" ]
+  } ],
+  "paths" : {
+    "/posts" : {
+      "get" : {
+        "tags" : [ "posts" ],
+        "summary" : "Query posts",
+        "operationId" : "getPosts",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "How many items to return at one time (max 100)",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "What item to start listing at",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "tags",
+          "in" : "query",
+          "description" : "What tags to include",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "fullText",
+          "in" : "query",
+          "description" : "Do a full text search of titles/body",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "postedBy",
+          "in" : "query",
+          "description" : "Only show comments by a particular user",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "An paged array of pets",
+            "schema" : {
+              "$ref" : "#/definitions/ContentNodes"
+            },
+            "headers" : {
+              "x-next" : {
+                "type" : "string",
+                "description" : "A link to the next page of responses"
+              }
+            }
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "posts" ],
+        "summary" : "Create a post",
+        "operationId" : "newPost",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "post",
+          "description" : "The post to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ContentNode"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Null response"
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "posts" ],
+        "summary" : "Update a post",
+        "operationId" : "updatePost",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "post",
+          "description" : "The data to replace the old data with",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ContentNode"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Null response"
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/posts/{postId}" : {
+      "get" : {
+        "tags" : [ "posts" ],
+        "summary" : "Query for a specific post",
+        "operationId" : "getPostById",
+        "parameters" : [ {
+          "name" : "postId",
+          "in" : "path",
+          "description" : "The id of the post to retrieve",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Expected response to a valid request",
+            "schema" : {
+              "$ref" : "#/definitions/ContentNode"
+            }
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/comments" : {
+      "get" : {
+        "tags" : [ "comments" ],
+        "summary" : "Query comments",
+        "operationId" : "getComments",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "How many items to return at one time (max 100)",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "What item to start listing at",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "fullText",
+          "in" : "query",
+          "description" : "Do a full text search of comment bodies",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "postedBy",
+          "in" : "query",
+          "description" : "Only show comments by a particular user",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "An paged array of pets",
+            "schema" : {
+              "$ref" : "#/definitions/ContentNodes"
+            },
+            "headers" : {
+              "x-next" : {
+                "type" : "string",
+                "description" : "A link to the next page of responses"
+              }
+            }
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "comments" ],
+        "summary" : "Create a comment",
+        "operationId" : "newComment",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "comment",
+          "description" : "The comment to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ContentNode"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Null response"
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "comments" ],
+        "summary" : "Update a comment",
+        "operationId" : "updateComment",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "comment",
+          "description" : "The data to replace the old data with",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ContentNode"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Null response"
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/comments/{commentId}" : {
+      "get" : {
+        "tags" : [ "comments" ],
+        "summary" : "Query for a specific comment",
+        "operationId" : "getCommentsById",
+        "parameters" : [ {
+          "name" : "commentId",
+          "in" : "path",
+          "description" : "The id of the comment to retrieve",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Expected response to a valid request",
+            "schema" : {
+              "$ref" : "#/definitions/ContentNode"
+            }
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Query users",
+        "operationId" : "getUsers",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "How many items to return at one time (max 100)",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "What item to start listing at",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Search by username",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "An paged array of users",
+            "schema" : {
+              "$ref" : "#/definitions/Users"
+            },
+            "headers" : {
+              "x-next" : {
+                "type" : "string",
+                "description" : "A link to the next page of responses"
+              }
+            }
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Create a user",
+        "operationId" : "newUser",
+        "parameters" : [ {
+          "name" : "inviteCode",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "user",
+          "description" : "The user to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ContentNode"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Null response"
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "users" ],
+        "summary" : "Update a user",
+        "operationId" : "updateUser",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "user",
+          "description" : "The data to replace the old data with",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Null response"
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Query for a specific user",
+        "operationId" : "getUserById",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "The id of the user to retrieve",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Expected response to a valid request",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "default" : {
+            "description" : "unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/ping" : {
+      "get" : {
+        "summary" : "Server heartbeat operation",
+        "description" : "This operation shows how to override the global security defined above, as we want to open it up for all users.",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "security" : [ ]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "application" : {
+      "type" : "oauth2",
+      "tokenUrl" : "https://www.googleapis.com/oauth2/v4/token",
+      "flow" : "application",
+      "scopes" : {
+        "write" : "allows modifying resources",
+        "read" : "allows reading resources"
+      }
+    }
+  },
+  "definitions" : {
+    "ContentNode" : {
+      "required" : [ "children", "created", "score", "sentiment", "tags" ],
+      "properties" : {
+        "uid" : {
+          "type" : "string"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "imageUri" : {
+          "type" : "string"
+        },
+        "body" : {
+          "type" : "string"
+        },
+        "created" : {
+          "type" : "string"
+        },
+        "tags" : {
+          "$ref" : "#/definitions/Tags"
+        },
+        "score" : {
+          "type" : "number"
+        },
+        "sentiment" : {
+          "type" : "number"
+        },
+        "children" : {
+          "$ref" : "#/definitions/ContentNodes"
+        }
+      },
+      "example" : {
+        "uid" : "uid",
+        "score" : 0.80082819046101150206595775671303272247314453125,
+        "sentiment" : 6.02745618307040320615897144307382404804229736328125,
+        "imageUri" : "imageUri",
+        "children" : "",
+        "created" : "created",
+        "title" : "title",
+        "body" : "body",
+        "tags" : ""
+      }
+    },
+    "ContentNodes" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ContentNode"
+      }
+    },
+    "User" : {
+      "required" : [ "email", "name", "reputation", "role" ],
+      "properties" : {
+        "uid" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "aviImgUri" : {
+          "type" : "string"
+        },
+        "reputation" : {
+          "type" : "number"
+        },
+        "spent" : {
+          "type" : "number"
+        },
+        "role" : {
+          "$ref" : "#/definitions/Role"
+        },
+        "invitedBy" : {
+          "$ref" : "#/definitions/User"
+        },
+        "joined" : {
+          "type" : "string"
+        },
+        "posted" : {
+          "$ref" : "#/definitions/ContentNodes"
+        },
+        "commented" : {
+          "$ref" : "#/definitions/ContentNodes"
+        }
+      },
+      "example" : {
+        "uid" : "uid",
+        "password" : "password",
+        "role" : {
+          "uid" : "uid",
+          "text" : "text"
+        },
+        "invitedBy" : null,
+        "aviImgUri" : "aviImgUri",
+        "joined" : "joined",
+        "spent" : 6.02745618307040320615897144307382404804229736328125,
+        "name" : "name",
+        "reputation" : 0.80082819046101150206595775671303272247314453125,
+        "commented" : "",
+        "email" : "email",
+        "posted" : ""
+      }
+    },
+    "Users" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/User"
+      }
+    },
+    "Role" : {
+      "required" : [ "text" ],
+      "properties" : {
+        "uid" : {
+          "type" : "string"
+        },
+        "text" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "uid" : "uid",
+        "text" : "text"
+      }
+    },
+    "Tags" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "Tag" : {
+      "required" : [ "text" ],
+      "properties" : {
+        "uid" : {
+          "type" : "string"
+        },
+        "text" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Purchasable" : {
+      "required" : [ "cost", "name" ],
+      "properties" : {
+        "uid" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "cost" : {
+          "type" : "number"
+        }
+      }
+    },
+    "Invite" : {
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "createdBy" : {
+          "$ref" : "#/definitions/User"
+        }
+      }
+    },
+    "Error" : {
+      "required" : [ "code", "message" ],
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "message" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
