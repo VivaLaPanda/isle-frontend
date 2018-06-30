@@ -3,6 +3,8 @@ import {Content} from '../models/content';
 import * as ColorBetween from 'color-between';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ConfigService} from '../services/config.service';
+import {MatIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
 // Set of primary color codes that depthToColor cycles through
 const listOfColors = [
   '#3cba54',
@@ -41,7 +43,17 @@ export class ContentNodeComponent implements OnInit {
   // Used for toggling reply
   replyState: string;
 
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon(
+      'sentiment_positive',
+      sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/add-corner.svg'));
+    iconRegistry.addSvgIcon(
+      'sentiment_negative',
+      sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/minus-corner.svg'));
+    iconRegistry.addSvgIcon(
+      'sentiment_neutral',
+      sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/neutral-corner.svg'));
+  }
 
   ngOnInit() {
     this.collapseReply();
@@ -49,7 +61,7 @@ export class ContentNodeComponent implements OnInit {
     this.replyFieldOptions = {
       autofocus: true,
       autosave: {
-        enavled: true,
+        enabled: true,
         uniqueId: this.content.uid,
       },
       promptURLs: true,

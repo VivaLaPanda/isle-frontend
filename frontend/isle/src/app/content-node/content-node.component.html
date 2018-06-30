@@ -1,5 +1,10 @@
 <mat-card fxLayout="row">
-  <div class="depth-indicator indicator-bar" [style.backgroundColor]="depthToColor()" *ngIf="depth != 0"></div>
+  <div class="sentiment-container" *ngIf="content.sentiment !== undefined" [style.color]="depthToColor()">
+    <mat-icon class="sentiment" *ngIf="content.sentiment > 0" svgIcon="sentiment_positive"></mat-icon>
+    <mat-icon class="sentiment" *ngIf="content.sentiment == 0" svgIcon="sentiment_neutral"></mat-icon>
+    <mat-icon class="sentiment" *ngIf="content.sentiment < 0" svgIcon="sentiment_negative"></mat-icon>
+  </div>
+  <div class="depth-indicator indicator-bar" [style.backgroundColor]="depthToColor()" *ngIf="depth > 0"></div>
   <div class="card-body" fxLayout="column" fxFlex>
     <mat-card-title *ngIf="content.title">{{content?.title}}</mat-card-title>
     <div fxLayout="row" class="primary-content">
@@ -9,13 +14,7 @@
         <div fxLayout="row" fxFlex class="minor-content mat-caption">
           <div fxLayout="column" fxFlex="100">
             <div class="posted-by" fxLayout="row" fxLayoutAlign="start center">
-              <div class="sentiment" fxLayoutAlign="center center" *ngIf="content.sentiment !== undefined">
-                <mat-icon *ngIf="content.sentiment > 0">add_circle</mat-icon>
-                <mat-icon *ngIf="content.sentiment == 0">fiber_manual_record</mat-icon>
-                <mat-icon *ngIf="content.sentiment < 0">remove_circle</mat-icon>
-              </div>
               <div fxFlex="">
-                &nbsp;
                 Posted by&nbsp;
                 <b>{{content.poster.name}}</b>
                 <br fxHide.gt-xs/>
@@ -54,9 +53,9 @@
   </div>
   <div class="rep-indicator indicator-bar" [style.backgroundColor]="repToColor()" [style.opacity]="repToOpacity()"></div>
 </mat-card>
-<div fxLayout="row" fxLayoutAlign=" start">
-  <div style="width: 15px"></div>
-  <div id="children" fxLayout="column" style="width: 100%">
+<div fxLayout="row" fxLayoutAlign=" start" [class]="depth == 0 ? 'topBorder' : ''">
+  <div style="width: 15px" *ngIf="depth > 0"></div>
+  <div id="children" fxLayout="column">
     <app-content-node *ngFor="let child of content.children" [content]="child" [depth]="depth + 1"></app-content-node>
   </div>
 </div>

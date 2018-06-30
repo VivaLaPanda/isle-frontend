@@ -6,11 +6,6 @@
   padding: 24px;
 }
 
-.sentiment-spacer {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .reply {
   overflow: hidden;
   max-width: 900px !important;
@@ -22,4 +17,22 @@
 
 .indicator-bar {
   width: 15px;
+}
+
+.topBorder {
+  margin-top: 40px;
+}
+
+#children {
+  width: 100%
+}
+
+.sentiment {
+  transform: scale(2);
+  margin-top: 12px;
+  margin-left: 12px;
+}
+
+.sentiment-container {
+  position: absolute;
 }

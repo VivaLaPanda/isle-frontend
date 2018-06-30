@@ -45,7 +45,22 @@ export class ContentService {
               posted: '2018-03-20',
               reputation: 1,
               sentiment: 0,
-              children: []
+              children: [
+                {
+                  uid: 0,
+                  body: 'This is a comment, it\'s neutral!',
+                  poster: {
+                    uid: 0,
+                    name: 'Craig',
+                    aviUrl: 'badlink',
+                    reputation: 10,
+                  },
+                  posted: '2018-04-10',
+                  reputation: 600,
+                  sentiment: 0,
+                  children: []
+                },
+              ]
             },
           ]
         },

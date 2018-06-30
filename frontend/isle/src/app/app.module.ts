@@ -24,6 +24,7 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireModule} from 'angularfire2';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import {SidenavComponent} from './sidenav/sidenav.component';
+import {HttpClientModule} from '@angular/common/http';
 
 if (environment.production) {
   Raven
@@ -60,6 +61,7 @@ export class RavenErrorHandler implements ErrorHandler {
     AppRoutingModule,
     UIComponentModule,
     MarkdownToHtmlModule,
+    HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     Angulartics2Module.forRoot([ Angulartics2GoogleTagManager ])
   ],
